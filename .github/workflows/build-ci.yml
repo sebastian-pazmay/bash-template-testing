@@ -26,6 +26,6 @@ jobs:
         ls packages
     - uses: actions/upload-artifact@v2
       with:
-        name: os-testing-packages
+        name: bash-testing-packages
         path: ${{ github.workspace }}/bash-testing-app/packages/*
         if-no-files-found: error

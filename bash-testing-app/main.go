@@ -3,7 +3,7 @@ package main
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"os-testing-app/testSuites"
+	"bash-testing-app/testSuites"
 )
 
 type TestCase struct {
