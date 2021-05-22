@@ -1,0 +1,31 @@
+name: Build Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test_in_container:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag bash-testing:$(date +%s)
+  build_executables:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.14.0'
+    - run: |
+        cd bash-testing-app
+        env GOOS=linux GOARCH=amd64 go build -o packages/bash-template-testing main.go
+        ls packages
+    - uses: actions/upload-artifact@v2
+      with:
+        name: os-testing-packages
+        path: ${{ github.workspace }}/bash-testing-app/packages/*
+        if-no-files-found: error

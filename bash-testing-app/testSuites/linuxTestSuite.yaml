@@ -1,0 +1,12 @@
+---
+testCases:
+  -
+    Name:           "Verify software OS version"
+    Command:        "cat"
+    Argument:        "/etc/issue"
+    ExpectedResult: "Ubuntu 18.04.5"
+  -
+    Name:           "Verify root password is not empty"
+    Command:        "cat"
+    Argument:        "/etc/shadow"
+    ExpectedResult: "root:!"
